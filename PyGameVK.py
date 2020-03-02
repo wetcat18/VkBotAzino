@@ -68,10 +68,12 @@ for event in longpoll.listen():
                 if ID_num == 666:
                     #здесь будет часть кода которая добавляет новый айди в конец листа
                     users.append(str(event.user_id))
-                    users_money.append(1000)
+                    users_money.append(5000)
                 
 
                 write_msg(event.user_id, "Вы начали игру!")
+                write_msg(event.user_id, "Чтобы посмотреть ваш бюджет напишите - Бюджет")
+                write_msg(event.user_id, "Чтобы сыграть в рулетку чисел напишите - Загадать")
 
 
 
@@ -110,18 +112,19 @@ for event in longpoll.listen():
 
             elif status3 == 1:
                 if (int(request) < 1 or int(request) > 10):
-                    write_msg(event.user_id, "Ты тупой")
+                    write_msg(event.user_id, "Ты тупой? Число от 1 до 10")
                 manNUM = int(request)
-                random.randint(1, 10)
-                if random == manNUM:
-                    users_money[fun()]+= part*3
+                rand = random.randint(1, 10)
+                if rand == manNUM:
+                    users_money[fun()]+= part*5
                     part = 0
-                    write_msg(event.user_id, "Вы выиграли")
+                    write_msg(event.user_id, "Вы выиграли, ваша ставка прибавилась к вашему бюджету в пятерном эквиваленте")
                     status3 = 0
-                if random != manNUM:
+                if rand != manNUM:
                     users_money[fun()]-= part
                     part = 0
-                    write_msg(event.user_id, "Вы проиграли")
+                    write_msg(event.user_id, "Вы проиграли, вы указали неверно число. Верное число - ")
+                    write_msg(event.user_id, rand)
                     status3 = 0
 
 
@@ -137,7 +140,6 @@ for event in longpoll.listen():
                 exit()
 
             else:
-                print ('ID ' + str(event.user_id) + ': ' + request)
                 status1 = 0
                 status2 = 0
                 status3 = 0
